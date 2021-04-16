@@ -64,7 +64,11 @@ namespace RCN.API
 
 
             // Register the Swagger generator, defining 1 or more Swagger documents
-            services.AddSwaggerGen();
+            //services.AddSwaggerGen();
+			services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "ProEventos.API", Version = "v1" });
+            });
 
 
             //cconfigurando midware de compresão de dados
@@ -87,16 +91,14 @@ namespace RCN.API
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                                                                     
-            }
-
-                #region  'configuração do Swagger'
+				
+				           #region  'configuração do Swagger'
                     
-                // Enable middleware to serve generated Swagger as a JSON endpoint.
-                app.UseSwagger(c =>
-                {
-                    c.SerializeAsV2 = true;
-                });
+               // Enable middleware to serve generated Swagger as a JSON endpoint.
+               // app.UseSwagger(c =>
+               // {
+               //      c.SerializeAsV2 = true;
+               // });
 
                 // Enable middleware to serve generated Swagger as a JSON endpoint.
                 app.UseSwagger();
@@ -109,9 +111,11 @@ namespace RCN.API
                     c.RoutePrefix = string.Empty;
                 }); 
 
-                 #endregion  
-
-
+                 #endregion 
+                                                                     
+            }
+			
+			
             app.UseHttpsRedirection();
 
             //instansia os midware
